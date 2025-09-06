@@ -1,0 +1,32 @@
+
+<html>
+    <!-- Cabecera de la página web -->
+    <head>
+        <!-- Metadatos de la página web -->
+        <meta charset="UTF-8">
+        <!-- Metaetiqueta para hacer que la página sea responsiva en dispositivos móviles -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Título de la página -->
+        <title>Actividad 2 PAM</title>
+        <!-- Enlace a la hoja de estilos CSS -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!-- Cuerpo de la página web -->
+    <body>
+        <h1>Programación de Aplicaciones Móviles</h1>
+        <h2>Selecciona una opción:</h2>
+        <!-- Contenedor para los botones y el resultado -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Botones que llaman a la función info con diferentes argumentos -->
+            <button onclick="info('reglamentoPOO')">Reglamento POO</button>
+            <button onclick="info('lineamientosClassroom')">Lineamientos Classroom</button>
+            <button onclick="info('fechasDeParciales')">Fechas Parciales</button>
+            <button onclick="info('porcentajesPorParcial')">Porcentajes Parciales</button>
+            <!-- Contenedor para mostrar el resultado -->
+            <div id="resultado"></div>
+        </div>
+        
+    </body>
+    <!-- Enlace al archivo JavaScript -->
+    <script src="app.js"></script>
+</html>

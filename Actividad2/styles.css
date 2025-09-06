@@ -1,0 +1,53 @@
+
+button {
+    background-color: #2a97ce; /* Verde */
+    border: none; /* Sin borde */
+    color: white; /* Texto blanco */
+    padding: 15px 32px; /* Relleno */
+    text-align: center; /* Texto centrado */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Bloque */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 4px 2px; /* Margen */
+    cursor: pointer; /* Cursor de puntero */
+    border-radius: 12px; /* Bordes redondeados */
+}
+
+#resultado {
+    display: none; /* Oculto por defecto */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    width: 100%; /* Ancho completo */
+    max-width: 1000px; /* Ancho máximo */
+    height: 300px; /* Altura fija */
+    margin: auto; /* Centrar horizontalmente */
+    border: 2px solid #ccc; /* Borde gris */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    overflow: hidden; /* Ocultar desbordamiento */
+    
+}
+
+#resultado img{
+    max-width: 100%; /* Ancho máximo */
+    max-height: 100%; /* Altura máxima */
+    width: auto; /* Ancho automático */
+    height: auto; /* Altura automática */
+    object-fit: contain; /* Contener dentro del contenedor */
+    display: block; /* Bloque para centrar */
+    margin: auto; /* Centrar */
+}
+
+body {
+    font-family: Arial, sans-serif; /* Fuente */
+    margin: 20px; /* Margen */
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
+button:hover {
+    background-color: #24b9e2;
+}
+#resultado:hover {
+    transform: scale(1.01);
+    transition: transform 0.3s;
+}
