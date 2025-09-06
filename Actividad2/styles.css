@@ -1,6 +1,12 @@
 
+body {
+    font-family: Arial, sans-serif; /* Fuente */
+    margin: 20px; /* Margen */
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
 button {
-    background-color: #2a97ce; /* Verde */
+    background-color: #2a97ce; /* Azul */
     border: none; /* Sin borde */
     color: white; /* Texto blanco */
     padding: 15px 32px; /* Relleno */
@@ -38,16 +44,10 @@ button {
     margin: auto; /* Centrar */
 }
 
-body {
-    font-family: Arial, sans-serif; /* Fuente */
-    margin: 20px; /* Margen */
-    background-color: #f4f4f4; /* Fondo gris claro */
-}
-
 button:hover {
-    background-color: #24b9e2;
+    background-color: #24b9e2; /* Cambia a un azul más claro al pasar el cursor */
 }
 #resultado:hover {
-    transform: scale(1.01);
-    transition: transform 0.3s;
+    transform: scale(1.01); /* Escala ligeramente al pasar el cursor */
+    transition: transform 0.3s; /* Transición suave */
 }
