@@ -27,7 +27,7 @@ function info(tipo){
     //crear un objeto
     const obj = new inicioPAM();
     //variable para guardar el resultado
-    let resultado = "";
+    let resultado = '';
     //llamar al metodo dependiendo del tipo
     switch(tipo){
         case "reglamentoPOO":
@@ -49,7 +49,6 @@ function info(tipo){
     //mostrar o esconder el div dependiendo si hay resultado
     if(resultado){
         //mostrar el div
-        document.getElementById("resultado").innerHTML = resultado;
         document.getElementById("resultado").style.display = "flex";
     }else{
         //esconder el div
