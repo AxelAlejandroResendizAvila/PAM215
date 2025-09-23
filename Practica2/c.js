@@ -11,3 +11,4 @@ const imprimirPersonas = personas.forEach(p => console.log(p));
 //Salida: Ana Luis María
 const sumaEdades = personas.reduce((total, p) => total + p.edad, 0);
 console.log(sumaEdades);
+//Salida: 85
