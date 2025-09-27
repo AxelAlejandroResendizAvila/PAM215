@@ -6,4 +6,5 @@ const productos = [
 ];
 //Filtrar los productos cuyo precio sea mayor a 1000
 const nombres = productos.filter(producto => producto.precio > 1000).map(producto => producto.nombre);
-console.log(nombres);// Salida ['Laptop', 'Monitor']
+console.log(nombres); // Salida ['Laptop', 'Monitor']
+
