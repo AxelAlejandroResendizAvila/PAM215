@@ -1,0 +1,60 @@
+Me quedé en la parte de instalar dependencias porque tuve un error:
+
+
+npm warn cleanup Failed to remove some directories [
+npm warn cleanup   [
+npm warn cleanup     '\\\\?\\C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules',
+npm warn cleanup     [Error: EPERM: operation not permitted, rmdir 'C:\Users\Axel\AppData\Roaming\npm\node_modules\expo\node_modules\@expo\config-plugins\build'] {
+npm warn cleanup       errno: -4048,
+npm warn cleanup       code: 'EPERM',
+npm warn cleanup       syscall: 'rmdir',
+npm warn cleanup       path: 'C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\@expo\\config-plugins\\build'
+npm warn cleanup     }
+npm warn cleanup   ],
+npm warn cleanup   [
+npm warn cleanup     '\\\\?\\C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\@react-native',
+npm warn cleanup     [Error: EPERM: operation not permitted, rmdir 'C:\Users\Axel\AppData\Roaming\npm\node_modules\expo\node_modules\@react-native\gradle-plugin\settings-plugin\src\test'] {
+npm warn cleanup       errno: -4048,
+npm warn cleanup       code: 'EPERM',
+npm warn cleanup       syscall: 'rmdir',
+npm warn cleanup       path: 'C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\@react-native\\gradle-plugin\\settings-plugin\\src\\test'
+npm warn cleanup     }
+npm warn cleanup   ],
+npm warn cleanup   [
+npm warn cleanup     '\\\\?\\C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\@react-native\\gradle-plugin',
+npm warn cleanup     [Error: EPERM: operation not permitted, rmdir 'C:\Users\Axel\AppData\Roaming\npm\node_modules\expo\node_modules\@react-native\gradle-plugin\shared\src\test'] {
+npm warn cleanup       errno: -4048,
+npm warn cleanup       code: 'EPERM',
+npm warn cleanup       syscall: 'rmdir',
+npm warn cleanup       path: 'C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\@react-native\\gradle-plugin\\shared\\src\\test'
+npm warn cleanup     }
+npm warn cleanup   ],
+npm warn cleanup   [
+npm warn cleanup     '\\\\?\\C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\expo-modules-autolinking',
+npm warn cleanup     [Error: EPERM: operation not permitted, rmdir 'C:\Users\Axel\AppData\Roaming\npm\node_modules\expo\node_modules\expo-modules-autolinking\android\expo-gradle-plugin\expo-autolinking-plugin-shared\src\main'] {
+npm warn cleanup       errno: -4048,
+npm warn cleanup       code: 'EPERM',
+npm warn cleanup       syscall: 'rmdir',
+npm warn cleanup       path: 'C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\expo-modules-autolinking\\android\\expo-gradle-plugin\\expo-autolinking-plugin-shared\\src\\main'
+npm warn cleanup     }
+npm warn cleanup   ],
+npm warn cleanup   [
+npm warn cleanup     '\\\\?\\C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo',
+npm warn cleanup     [Error: EPERM: operation not permitted, rmdir 'C:\Users\Axel\AppData\Roaming\npm\node_modules\expo\node_modules\expo-modules-autolinking\android\expo-gradle-plugin\expo-autolinking-settings-plugin\src\main'] {
+npm warn cleanup       errno: -4048,
+npm warn cleanup       code: 'EPERM',
+npm warn cleanup       syscall: 'rmdir',
+npm warn cleanup       path: 'C:\\Users\\Axel\\AppData\\Roaming\\npm\\node_modules\\expo\\node_modules\\expo-modules-autolinking\\android\\expo-gradle-plugin\\expo-autolinking-settings-plugin\\src\\main'
+npm warn cleanup     }
+npm warn cleanup   ]
+npm warn cleanup ]
+npm error code ECONNRESET
+npm error syscall read
+npm error errno -4077
+npm error network read ECONNRESET
+npm error network This is a problem related to network connectivity.
+npm error network In most cases you are behind a proxy or have bad network settings.
+npm error network
+npm error network If you are behind a proxy, please make sure that the
+npm error network 'proxy' config is set properly.  See: 'npm help config'
+npm error A complete log of this run can be found in: C:\Users\Axel\AppData\Local\npm-cache\_logs\2025-10-07T01_53_52_949Z-debug-0.log
