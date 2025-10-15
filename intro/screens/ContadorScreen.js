@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import { StatusBar } from "react-native-web";
 
 //2. Main: Zona de componentes
-export default function App() {
+export default function ContadorScreen() {
   //Variable y una función
   const[contador, setContador]=useState(0);
   return (
