@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import ContadorScreen from './ContadorScreen';
 import BotonesScreen from './BotonesScreens';
 import TextosScreen from './TextosScreens';
@@ -10,8 +10,6 @@ import IndicadorScreen from './IndicadorScreens';
 import ListasScreen from './ListasScreens';
 import ModalScreen from './ModalScreens';
 import BottomScreen from './BottomScreens';
-
-import { Button } from 'react-native-web';
 
 export default function MenuScreen() {
     const[screen, setScreen] = useState('menu');
@@ -61,6 +59,8 @@ const styles = StyleSheet.create({
         fontFamily: "monospace", 
         fontSize: 40, //Tamaño de la letra
         color: "#ffffffff",
+        textAlign: 'center',
+        
     },
     container: {
         flex: 1,
