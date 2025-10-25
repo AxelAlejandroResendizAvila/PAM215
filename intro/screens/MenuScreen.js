@@ -10,6 +10,7 @@ import IndicadorScreen from './IndicadorScreens';
 import ListasScreen from './ListasScreens';
 import ModalScreen from './ModalScreens';
 import BottomScreen from './BottomScreens';
+import RegistroScreen from './RegistroScreens';
 
 export default function MenuScreen() {
     const[screen, setScreen] = useState('menu');
@@ -33,6 +34,8 @@ export default function MenuScreen() {
             return <ModalScreen />;
         case 'bottom':
             return <BottomScreen />;
+        case 'registro':
+            return <RegistroScreen />;
         case 'menu':
             default:
                 return (
@@ -48,6 +51,7 @@ export default function MenuScreen() {
                             <Button color="#150d84ff" onPress={()=>setScreen('listas')} title='Pract: Listas'/>
                             <Button color="#150d84ff" onPress={()=>setScreen('modal')} title='Pract: Modal'/>
                             <Button color="#150d84ff" onPress={()=>setScreen('bottom')} title='Pract: Bottom'/>
+                            <Button color="#150d84ff" onPress={()=>setScreen('registro')} title='Pract: Registro'/>
                         </View>
                     </View>
                 )
