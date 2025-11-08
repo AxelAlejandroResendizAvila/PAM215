@@ -1,52 +1,26 @@
-import { Text, StyleSheet, View, ImageBackground, Animated, Easing, Button, TextInput, Alert , Switch, ScrollView} from 'react-native'
+import { Text, StyleSheet, View, ImageBackground, Animated, Easing, Button, TextInput, Alert , Switch, ScrollView, TouchableOpacity} from 'react-native'
 import React,{ useEffect, useState } from 'react';
 
 export default function ExamenScreen() {
     const[cargando,setCargando]= useState(true);
     const desvanecido = new Animated.Value(1);
-    const[nombre,setNombre] = useState('');
-    const[correo,setcorreo] = useState('');
-    const [esEncendido, cambiarEncendido] = useState(false);
-    const [correoError, setCorreoError] = useState(false);
 
-    
-    const mostrarAlerta = () => {
-        const validateCorreo = (correo) => {
-        // Expresión regular básica para validar el formato del correo
-        const CorreoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (CorreoRegex.test(correo)) {
-          setCorreoError(false);
-        } else {
-          setCorreoError(true);
-        }
-      };
-      validateCorreo(correo);
-      if(nombre.trim() === '' && correo.trim() === ''){    
-        Alert.alert("Error, favor de llenar todos los campos (Móvil)");
-        alert("Favor de llenar todos los campos (Web)");
-      }else if(nombre.trim() === '') {
-        Alert.alert("Error, favor de llenar el campo del nombre(Móvil)");
-        alert("Favor de llenar el campo del nombre (Móvil)");
-      }else if( correo.trim() === ''){
-        Alert.alert("Error, favor de llenar el campo del correo(Móvil)");
-        alert("Favor de llenar el campo del correo (Móvil)");
-      }else if(esEncendido === false){
-        Alert.alert("Error, favor de aceptar los términos y condiciones(Móvil)");
-        alert("Favor de aceptar los términos y condiciones(Web)");
-      }else if(correoError){
-         Alert.alert("Error, ingresa un correo valido(Móvil)");
-        alert("Favor de ingresar un correo valido(Web)");
-      }else {
-         //Alert para móvil
-        Alert.alert(`Registro exitoso`,`Nombre: ${nombre}\ncorreo: ${correo}`
-        );
-        //Alert para web
-        alert(`Registro exitoso\n
-          Nombre: ${nombre}\n
-          correo: ${correo}\n`
-        );
-      }
+    const [esEncendido1, cambiarEncendido1] = useState(false);
+    const [esEncendido2, cambiarEncendido2] = useState(false);
+    const [esEncendido3, cambiarEncendido3] = useState(false);
+    const [esEncendido4, cambiarEncendido4] = useState(false);
+    const [esEncendido5, cambiarEncendido5] = useState(false);
+    const [esEncendido6, cambiarEncendido6] = useState(false);
+
+    const ReiniciarEstatus = () => {
+      cambiarEncendido1(false);
+      cambiarEncendido2(false);
+      cambiarEncendido3(false);
+      cambiarEncendido4(false);
+      cambiarEncendido5(false);
+      cambiarEncendido6(false);
     }
+    
 
     useEffect(()=>{
       const timer = setTimeout(()=>{
@@ -101,22 +75,110 @@ export default function ExamenScreen() {
                     <Text style={styles.tituloCategoria}>Trabajo </Text>
                     <View style={styles.objetivo}>
                       <Text style={styles.tituloCategoria}> Objetivo 1: </Text>
-                      <Text style={styles.descripcion}> Terminar el proyecto de React Native para la aplicación móvil. </Text>
+                      <Text style={styles.descripcion}> Terminar el proyecto que tuve en la oficina</Text>
+                      <View style={styles.prioridadContainer}>
+                  
+                        <View style={styles.estatusContainer}>
+                          <Text style={styles.estatusTexto}>{esEncendido1 ? 'Completada' : 'Pendiente'}</Text>
+                        <Switch
+                          value={esEncendido1}
+                          onValueChange={cambiarEncendido1}
+                        />
+                        </View>
+                        <Text style={styles.prioridadMedia}> Prioridad: Media </Text>
+                      </View>
                     </View>
                     <View style={styles.objetivo}>
                       <Text style={styles.tituloCategoria}> Objetivo 2: </Text>
                       <Text style={styles.descripcion}> Adelantar a mis labores de programación.</Text>
+                      <View style={styles.prioridadContainer}>
+                  
+                        <View style={styles.estatusContainer}>
+                          <Text style={styles.estatusTexto}>{esEncendido2 ? 'Completada' : 'Pendiente'}</Text>
+                        <Switch
+                          value={esEncendido2}
+                          onValueChange={cambiarEncendido2}
+                        />
+                        </View>
+                        <Text style={styles.prioridadAlta}> Prioridad: Alta </Text>
+                      </View>
                     </View>
                     
                 </View>
                 <View style={styles.categoria2}>
                     <Text style={styles.tituloCategoria}>Personal </Text>
+                    <View style={styles.objetivo}>
+                      <Text style={styles.tituloCategoria}> Objetivo 1: </Text>
+                      <Text style={styles.descripcion}> Tender mi cama y lavarme los dientes.</Text>
+                      <View style={styles.prioridadContainer}>
+                  
+                        <View style={styles.estatusContainer}>
+                          <Text style={styles.estatusTexto}>{esEncendido3 ? 'Completada' : 'Pendiente'}</Text>
+                        <Switch
+                          value={esEncendido3}
+                          onValueChange={cambiarEncendido3}
+                        />
+                        </View>
+                        <Text style={styles.prioridadBaja}> Prioridad: Baja </Text>
+                      </View>
+                    </View>
+                    <View style={styles.objetivo}>
+                      <Text style={styles.tituloCategoria}> Objetivo 2: </Text>
+                      <Text style={styles.descripcion}> Hacer ejercicio en la noche.</Text>
+                      <View style={styles.prioridadContainer}>
+                  
+                        <View style={styles.estatusContainer}>
+                          <Text style={styles.estatusTexto}>{esEncendido4 ? 'Completada' : 'Pendiente'}</Text>
+                        <Switch
+                          value={esEncendido4}
+                          onValueChange={cambiarEncendido4}
+                        />
+                        </View>
+                        <Text style={styles.prioridadMedia}> Prioridad: Media </Text>
+                      </View>
+                    </View>
                 </View>
                 <View style={styles.categoria3}>
                     <Text style={styles.tituloCategoria}>Estudios </Text>
+                    <View style={styles.objetivo}>
+                      <Text style={styles.tituloCategoria}> Objetivo 1: </Text>
+                      <Text style={styles.descripcion}> Terminar el proyecto de React Native para la aplicación móvil. </Text>
+                      <View style={styles.prioridadContainer}>
+                  
+                        <View style={styles.estatusContainer}>
+                          <Text style={styles.estatusTexto}>{esEncendido5 ? 'Completada' : 'Pendiente'}</Text>
+                        <Switch
+                          value={esEncendido5}
+                          onValueChange={cambiarEncendido5}
+                        />
+                        </View>
+                        <Text style={styles.prioridadMedia}> Prioridad: Media </Text>
+                      </View>
+                    </View>
+                    <View style={styles.objetivo}>
+                      <Text style={styles.tituloCategoria}> Objetivo 2: </Text>
+                      <Text style={styles.descripcion}> Hacer el reporte diario de mis avances.</Text>
+                      <View style={styles.prioridadContainer}>
+                  
+                        <View style={styles.estatusContainer}>
+                          <Text style={styles.estatusTexto}>{esEncendido6 ? 'Completada' : 'Pendiente'}</Text>
+                        <Switch
+                          value={esEncendido6}
+                          onValueChange={cambiarEncendido6}
+                        />
+                        </View>
+                        <Text style={styles.prioridadBaja}> Prioridad: Baja </Text>
+                      </View>
+                    </View>
                 </View>
 
             </ScrollView>
+            <TouchableOpacity style={styles.reiniciarTodosEstatus}
+              onPress={()=>{
+                ReiniciarEstatus();
+              }}>
+              <Text style={styles.reiniciarTexto}>Reiniciar Todos los Estatus</Text>
+            </TouchableOpacity>
           </View>
 
           
@@ -128,7 +190,36 @@ export default function ExamenScreen() {
 }
 
 const styles = StyleSheet.create({
+  reiniciarTodosEstatus:{
+    marginTop: 10,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00000065',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  reiniciarTexto:{
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+
+      estatusContainer:{
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      estatusTexto:{
+        color: 'black',
+        fontSize: 12,
+        fontWeight: 'bold',
+        marginRight: 5,
+
+      },
     objetivo:{
+      width: '100%',
       marginTop: 10,
       backgroundColor: '#ffffff65',
       padding: 10,
@@ -139,6 +230,27 @@ const styles = StyleSheet.create({
       fontSize: 12,
       fontWeight: 'bold',
 
+    },
+    prioridadContainer:{
+      marginTop: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    prioridadAlta:{
+      color: 'red',
+      fontSize: 12,
+      fontWeight: 'bold',
+    },
+    prioridadMedia:{
+      color: 'orange',
+      fontSize: 12,
+      fontWeight: 'bold',
+    },
+    prioridadBaja:{
+      color: 'green',
+      fontSize: 12,
+      fontWeight: 'bold',
     },
     
     tituloCategoria:{
@@ -173,7 +285,7 @@ const styles = StyleSheet.create({
     },
     scrollviewContainer:{
       marginBottom: 20,
-        height: 200,
+        height: 400,
         width: '100%',
     },
     encabezado: {
