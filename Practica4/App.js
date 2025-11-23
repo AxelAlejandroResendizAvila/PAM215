@@ -1,17 +1,19 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
-import Home from "./screens/home";
-import Profile from "./screens/profile";
-import Settings from "./screens/settings";
+import Home from './screens/home';
+import Profile from './screens/profile';
+import Settings from './screens/settings';
+import Details from './screens/details';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+function MainTabs() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
+    <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
           headerShown: false,
@@ -21,7 +23,7 @@ export default function App() {
             if (route.name === "Home") {
               iconName = "home";
             } else if (route.name === "Profile") {
-              iconName = "person";
+              iconName = "person";      
             } else if (route.name === "Settings") {
               iconName = "settings";
             }
@@ -36,11 +38,43 @@ export default function App() {
           },
         })}
       >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Profile" component={Profile} />
-        <Tab.Screen name="Settings" component={Settings} />
+        <Tab.Screen 
+          name="Home"
+          component={Home}
+          options={{ headerShown: true, headerTitleAlign: 'center'}}
+        />
+        <Tab.Screen 
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false, headerTitleAlign: 'center'}}
+        />
+        <Tab.Screen 
+          name="Settings"
+          component={Settings}
+          options={{ headerShown: true, headerTitleAlign: 'center'}}
+        />
 
       </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="MainTabs"
+          component={MainTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Detalle"
+          component={Details}
+          options={{
+            headerTitleAlign: 'center',
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
