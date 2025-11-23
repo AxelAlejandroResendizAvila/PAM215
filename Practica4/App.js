@@ -46,7 +46,7 @@ function MainTabs() {
         <Tab.Screen 
           name="Profile"
           component={Profile}
-          options={{ headerShown: false, headerTitleAlign: 'center'}}
+          options={{ headerShown: true, headerTitleAlign: 'center'}}
         />
         <Tab.Screen 
           name="Settings"
