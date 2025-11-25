@@ -45,7 +45,7 @@ export default function InsertUsuarioScreen() {
   const handleAgregar = async () => {
     try {
       setGuardando(true);
-      const nuevoUsuario = await controller.crearUsuario(nombre);
+      const usuarioCreado = await controller.crearUsuario(nombre);
       Alert.alert(`Usuario Creado`, `${usuarioCreado.nombre}" guardado con ID ${usuarioCreado.id}`);
       setNombre('');
     } catch (error) {
