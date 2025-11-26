@@ -43,6 +43,43 @@ export class UsuarioController {
             throw error;
         }
     }
+    // Actualiza un usuario existente
+
+    async actualizarUsuario(id, nuevoNombre) {
+        try {
+            // Validar datos
+            Usuario.validar(nuevoNombre);
+
+            // Actualizar en BD
+            const actualizado = await DatabaseService.update(id, nuevoNombre.trim());
+
+            // Notificar a los observadores
+            this.notifyListeners();
+
+            return new Usuario(actualizado.id, actualizado.nombre, actualizado.fechaCreacion);
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error);
+            throw error;
+        }
+    }
+
+    async eliminarUsuario(id) {
+        try {
+            if (id === undefined || id === null) {
+                throw new Error('ID inválido para eliminación');
+            }
+            // Eliminar en BD
+            await DatabaseService.delete(id);
+
+            // Notificar a los observadores
+            this.notifyListeners();
+
+            return true;
+        } catch (error) {
+            console.error('Error al eliminar usuario:', error);
+            throw error;
+        }
+    }
 
     //Sistema de observadores para actualizar la vista automáticamente
     addListener(callback) {

@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform, Modal } from 'react-native';
 import { UsuarioController } from '../controllers/UsuarioController';
 
 const controller = new UsuarioController();
@@ -8,8 +8,14 @@ export default function InsertUsuarioScreen() {
 
   const [usuarios, setUsuarios] = useState([]);
   const [nombre, setNombre] = useState('');
+  const [modal, setModal] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [editarNombre, setEditarNombre] = useState('');
+  const [editarUsuarioId, setEditarUsuarioId] = useState(null);
+  const [fechaEdicion, setFechaEdicion] = useState('');
   const [loading, setLoading] = useState(true);
   const [guardando, setGuardando] = useState(false);
+  const [editarGuardando, setEditarGuardando] = useState(false);
 
 
   //SELECT - Cargar usuarios desde la BD
@@ -55,8 +61,65 @@ export default function InsertUsuarioScreen() {
     }
   }
 
+  // Eliminar usuario (muestra confirmación y llama al controller)
+  const handleEliminarUsuario = () => {
+    Alert.alert(
+      'Confirmar',
+      '¿Eliminar este usuario?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Eliminar',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await controller.eliminarUsuario(editarUsuarioId);
+              setModal(false);
+              setEdit(false);
+              setEditarUsuarioId(null);
+              setEditarNombre('');
+            } catch (e) {
+              Alert.alert('Error', e.message);
+            }
+          }
+        }
+      ]
+    );
+  }
+
+  // Guardar cambios del usuario editado
+  const handleGuardarCambios = async () => {
+    try {
+      setEditarGuardando(true);
+      await controller.actualizarUsuario(editarUsuarioId, editarNombre);
+      setModal(false);
+      setEdit(false);
+      setEditarUsuarioId(null);
+      setEditarNombre('');
+      setEdit(false);
+    } catch (e) {
+      Alert.alert('Error', e.message);
+    } finally {
+      setEditarGuardando(false);
+    }
+  }
+
   const renderUsuario = ({ item, index }) => (
-    <View style={styles.userItem}>
+    <TouchableOpacity style={styles.userItem}
+      onPress={() => {
+        setEditarUsuarioId(item.id);
+        setEditarNombre(item.nombre);
+        setFechaEdicion(new Date(item.fechaCreacion).toLocaleDateString('es-MX', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        }));
+        setModal(true);
+      }}
+    >
       <View style={styles.userNumber}>
         <Text style={styles.userNumberText}>{index + 1}</Text>
       </View>
@@ -68,10 +131,13 @@ export default function InsertUsuarioScreen() {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
           })}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
 
   );
   return (
@@ -151,6 +217,75 @@ export default function InsertUsuarioScreen() {
 
 
       </View>
+
+      <Modal 
+        style={styles.editarNombreModal}
+        visible={modal}
+        onRequestClose={() => {
+          setModal(false);
+        }}
+        animationType="fade"
+        transparent={true}
+      >
+        
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            {!edit ? (
+              <View style={styles.modalTitleContainer}>
+                
+                 <Text style={styles.modalTitle}>{editarNombre}</Text>
+                
+                <TouchableOpacity style={styles.modalButtonEdit} 
+                  onPress={()=>{setEdit(true)}}
+                >
+                  <Text style={styles.modalButtonText}>Editar</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+                <View style={styles.modalTitleContainer}>
+                  <TextInput
+                      style={styles.modalInput}
+                      placeholder="Escribe el nuevo nombre"
+                      value={editarNombre}
+                      onChangeText={setEditarNombre}
+                    />
+                  <TouchableOpacity 
+                    style={styles.modalButtonCancelEdit} 
+                    onPress={handleEliminarUsuario}
+                  >
+                    <Text style={styles.modalButtonText}>Eliminar</Text>
+                  </TouchableOpacity>
+                </View>
+            )}
+            <Text style={styles.modalId}>ID: {editarUsuarioId}</Text>
+            <Text style={styles.modalDate}>Fecha de creación: {fechaEdicion}</Text>
+
+            
+            <View style={styles.modalButtons}>
+              <TouchableOpacity
+                style={[styles.modalButton]}
+                onPress={() => {
+                  setModal(false);
+                  setEdit(false);
+                  setEditarUsuarioId(null);
+                  setEditarNombre('');
+                }}
+              >
+                <Text style={styles.modalButtonText}>Cancelar</Text>
+              </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.modalButton, editarGuardando && styles.buttonDisabled]}
+                  onPress={handleGuardarCambios}
+                  disabled={editarGuardando}
+                >
+                  <Text style={styles.modalButtonText}>{editarGuardando ? 'Guardando...' : 'Guardar'}</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+
+      </Modal>
 
 
     </View>
@@ -336,4 +471,91 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1976D2',
   },
+  editarNombreModal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 12,
+    width: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  modalTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  modalButtonEdit: {
+    backgroundColor: '#ff8400ff',
+    padding: 8,
+    borderRadius: 30,
+    alignItems: 'center', 
+    
+  },
+  modalButtonCancelEdit: {
+    backgroundColor: '#ff0000ff',
+    padding: 8,
+    borderRadius: 30,
+    alignItems: 'center', 
+  },
+  modalTitle: {
+    color: '#333',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    
+  },
+  modalId: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 10,
+  },
+  modalDate: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20,
+  },
+  modalInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    borderRadius: 8,
+    padding: 15,
+    marginBottom: 12,
+    marginRight: 10,
+    fontSize: 16,
+    backgroundColor: '#fafafa',
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  modalButton: {
+    flex: 1,
+    backgroundColor: '#007AFF',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  modalButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+
 });
